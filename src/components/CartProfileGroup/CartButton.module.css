@@ -1,0 +1,7 @@
+.cart-btn {
+  background: transparent;
+}
+
+.cart-btn:focus {
+  transform: scale(1.2);
+}

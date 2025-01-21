@@ -1,0 +1,17 @@
+.lightbox-close-btn {
+  padding: 0;
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+
+  background: transparent;
+}
+
+.lightbox-close-btn svg {
+  fill: var(--clr-white);
+  transition: fill 300ms ease;
+}
+
+.lightbox-close-btn:hover svg {
+  fill: var(--clr-primary-orange);
+}

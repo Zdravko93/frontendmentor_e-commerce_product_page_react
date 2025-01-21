@@ -1,0 +1,31 @@
+.header {
+  padding: 2.2em;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-logotype-group {
+  display: flex;
+  align-items: center;
+}
+
+.menu-btn {
+  position: fixed;
+  z-index: 200;
+  background: transparent;
+  margin-right: 1em;
+}
+
+.menu-btn:focus {
+  /* outline: 1px solid var(--clr-primary-orange); */
+  transform: scale(1.4);
+}
+
+.logo-img {
+  margin-left: 2em;
+  height: 100%;
+}

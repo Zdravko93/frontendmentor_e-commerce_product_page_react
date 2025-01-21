@@ -1,0 +1,25 @@
+.cart-profile-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.cart-container {
+  position: relative;
+}
+
+.cart-items-number {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.3rem;
+  padding-inline: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 15px;
+  background: var(--clr-primary-orange);
+  color: var(--clr-white);
+  font-size: 0.6rem;
+}

@@ -1,0 +1,29 @@
+.checkout-btn {
+  margin-bottom: 2em;
+  padding: 1em;
+  margin-inline: auto;
+  background: var(--clr-primary-orange);
+  color: var(--clr-black);
+  width: calc(100% - 2em);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: all 100ms ease;
+}
+
+.checkout-btn:hover {
+  background: var(--clr-primary-pale-orange);
+}
+
+.checkout-btn:focus {
+  transform: scale(1.03);
+  outline: 3px solid var(--clr-black);
+}
+
+.checkout-btn:active {
+  background: var(--clr-black);
+  color: var(--clr-white);
+}

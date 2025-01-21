@@ -1,0 +1,15 @@
+h4 {
+  margin-bottom: 0.4em;
+  color: var(--clr-dark-grayish-blue);
+  font-weight: 500;
+}
+
+.number-details {
+  margin-right: 1em;
+  color: var(--clr-dark-grayish-blue);
+  font-weight: 500;
+}
+
+.total-price {
+  font-weight: 900;
+}

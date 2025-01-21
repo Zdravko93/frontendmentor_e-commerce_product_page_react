@@ -1,0 +1,57 @@
+.checkout-modal {
+  z-index: 100;
+  padding: 5em 2em;
+  position: fixed;
+  margin: auto;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+  background: rgb(107, 41, 41);
+
+  color: var(--clr-white);
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  text-align: center;
+
+  transition: all 200ms ease;
+}
+
+.checkout-modal h3 {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.checkout-modal button {
+  padding: 0.8em;
+  width: 20%;
+  margin: auto;
+  border-radius: 2px;
+  font-weight: 500;
+  color: green;
+  font-size: 0.8rem;
+  transition: all 100ms ease-in-out;
+}
+
+.checkout-modal button:hover {
+  color: white;
+  background: green;
+}
+
+@media (min-width: 768px) {
+  .checkout-modal {
+    min-width: 500px;
+  }
+
+  .checkout-modal h3 {
+    font-size: 1rem;
+  }
+
+  .checkout-modal button {
+    font-size: 0.9rem;
+  }
+}

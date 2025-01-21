@@ -1,0 +1,7 @@
+.cart-empty-text-container p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clr-dark-grayish-blue);
+  text-align: center;
+  width: 100%;
+}

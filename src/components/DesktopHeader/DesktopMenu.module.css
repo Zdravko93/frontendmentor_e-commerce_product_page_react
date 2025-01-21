@@ -1,0 +1,59 @@
+.desktop-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+
+  margin-left: 2em;
+}
+
+.desktop-menu li {
+  position: relative;
+}
+
+.desktop-menu li::after {
+  content: "";
+  position: absolute;
+  bottom: -2.5em;
+  left: 0;
+  width: 0;
+  display: inline-block;
+  height: 4px;
+  background: var(--clr-primary-orange);
+
+  transition: width 300ms ease;
+}
+
+.desktop-menu li:hover::after {
+  width: 100%;
+}
+
+.desktop-menu a {
+  text-decoration: none;
+  color: var(--clr-dark-grayish-blue);
+  font-size: 0.8rem;
+  font-weight: 200;
+  transition: all 300ms ease;
+}
+
+.desktop-menu a:hover {
+  color: var(--clr-black);
+  font-weight: 700;
+}
+
+.desktop-menu a:focus-visible {
+  color: var(--clr-primary-orange);
+  font-weight: 500;
+  outline: none;
+  font-size: 1rem;
+}
+
+@media (min-width: 900px) {
+  .desktop-menu {
+    gap: 2.2em;
+  }
+
+  .desktop-menu a {
+    font-size: 0.9rem;
+  }
+}
