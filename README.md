@@ -8,7 +8,7 @@
   - [Links](#links)
 - [My process](#my-process)
   - [Technologies used](#technologies-used)
-  - [What I learned](#what-i-learned)
+- [Installation](#installation)
 - [Author](#author)
 
 ## Overview
@@ -26,12 +26,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./public/Screenshot%20e-commerce%20product%20page_project.png)
+![E-commerce Product Page Screenshot](./public/Screenshot%20e-commerce%20product%20page_project.png)
 
 ### Links
 
-- Solution URL: (https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react/tree/master)
-- Live Site URL: (https://zdravko93.github.io/frontendmentor_e-commerce_product_page_react/)
+- Solution URL: [GitHub Repository](https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react/tree/master)
+- Live Site URL: [Live Demo](https://zdravko93.github.io/frontendmentor_e-commerce_product_page_react/)
 
 ## My process
 
@@ -43,8 +43,25 @@ Users should be able to:
 - React Context API – For managing global state (e.g., cart items)
 - React Hooks – useState, useEffect, and custom hooks for dynamic functionality
 
+## Installation
+
+ Follow these steps to run this project locally: 
+ 
+ 1. Clone the repository:
+ ```bash
+ git clone https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react.git
+```
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Visit http://localhost:3000 to see the app in action.
 
 ## Author
 
-- Github - [Zdravko93](https://github.com/Zdravko93)
-- Frontend Mentor - [@Zdravko93](https://www.frontendmentor.io/profile/Zdravko93)
+- Github - [Github](https://github.com/Zdravko93)
+- Frontend Mentor - [Frontend Mentor](https://www.frontendmentor.io/profile/Zdravko93)
