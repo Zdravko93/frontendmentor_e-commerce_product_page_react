@@ -7,7 +7,7 @@
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
-  - [Built with](#built-with)
+  - [Technologies used](#technologies-used)
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
@@ -30,18 +30,19 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: (https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react/tree/master)
+- Live Site URL: (https://zdravko93.github.io/frontendmentor_e-commerce_product_page_react/)
 
 ## My process
 
-### Built with
+### Technologies Used
 
-- React/JSX Markup
-- CSS - module.css
-- Flexbox
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- React – JavaScript library for building user interfaces
+- CSS Modules – For scoped styling
+- Flexbox – For layout and responsiveness
+- React Context API – For managing global state (e.g., cart items)
+- React Hooks – useState, useEffect, and custom hooks for dynamic functionality
+
 
 ## Author
 
