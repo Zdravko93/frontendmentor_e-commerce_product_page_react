@@ -12,6 +12,7 @@ This is a solution to the E-commerce product page challenge on Frontend Mentor. 
   - [Technologies used](#technologies-used)
   - [Features](#features)
   - [What I learned](#what-I-learned)
+  - [State Management Decisions](#state-management-decisions)
 - [Installation & Usage](#installation-&-usage)
 - [Author](#author)
 - [Future Improvements](#future-improvements)
@@ -48,7 +49,7 @@ Users should be able to:
 - React Context API – For managing global state (e.g., cart items)
 - React Hooks – useState, useEffect, and custom hooks for dynamic functionality
 
-### Features 
+### Features
 
 - Responsive design across mobile, tablet, and desktop
 - Interactive product gallery with lightbox functionality
@@ -63,12 +64,27 @@ Users should be able to:
 - Reinforced responsive design principles with Flexbox
 - Gained experience structuring a React project with modular CSS
 
+### State Management Decisions
+
+In this project, I intentionally chose to use `useState` in the main App.js component rather than `useReducer`.
+
+**Reasoning**:
+
+- The state logic is simple: toggling booleans, incrementing/decrementing counts, and resetting cart items
+- There are **no complex interdependent state updates** that would benefit from a reducer
+- Using useReducer here would have added unnecessary boilerplate and made the code harder to maintain
+- This demonstrates the ability to **choose the right tool for the job**, balancing simplicity and scalability
+
+✅ Result: Clean, readable, and maintainable state management without overengineering.
+
 ## Installation & Usage
 
- 1. Clone the repository:
- ```bash
- git clone https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react.git
+1.  Clone the repository:
+
+```bash
+git clone https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_react.git
 ```
+
 2. Install the required dependencies:
    ```bash
    npm install
@@ -83,7 +99,6 @@ Users should be able to:
 
 - Github - [Github](https://github.com/Zdravko93)
 - Frontend Mentor - [Frontend Mentor](https://www.frontendmentor.io/profile/Zdravko93)
-
 
 ## Future Improvements
 
