@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./MenuIcons.module.css";
 
 export default function MenuIconClose({ ariaLabel, ariaHidden }) {

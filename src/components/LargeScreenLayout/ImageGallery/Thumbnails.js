@@ -1,5 +1,3 @@
-import React from "react";
-
 import Thumbnail from "./Thumbnail.js";
 
 export default function Thumbnails({

@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./Cart.module.css";
 
 import CartDataPrices from "./CartDataPrices.js";

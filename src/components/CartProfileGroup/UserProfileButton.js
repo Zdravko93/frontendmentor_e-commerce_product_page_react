@@ -1,5 +1,3 @@
-import React from "react";
-
 import userImg from "../../assets/image-avatar.png";
 
 import classes from "./UserProfileButton.module.css";

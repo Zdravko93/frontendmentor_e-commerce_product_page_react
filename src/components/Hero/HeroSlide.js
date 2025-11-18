@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import arrowLeftImg from "../../assets/icon-previous.svg";
 import arrowRightImg from "../../assets/icon-next.svg";

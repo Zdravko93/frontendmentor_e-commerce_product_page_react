@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ArrowButton({ className, arrowImage, onClick }) {
   return (
     <button onClick={onClick}>

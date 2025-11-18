@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./CartCheckoutModal.module.css";
 
 import Backdrop from "../Backdrop/Backdrop.js";

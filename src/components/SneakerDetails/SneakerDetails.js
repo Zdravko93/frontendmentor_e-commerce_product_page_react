@@ -1,5 +1,3 @@
-import React from "react";
-
 import minusImg from "../../assets/icon-minus.svg";
 import plusImg from "../../assets/icon-plus.svg";
 import cartImg from "../../assets/icon-cart.svg";

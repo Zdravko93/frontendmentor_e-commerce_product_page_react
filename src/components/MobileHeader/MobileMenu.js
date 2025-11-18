@@ -1,5 +1,3 @@
-import React from "react";
-
 import MenuLinks from "../MenuLinks/MenuLinks.js";
 
 export default function MobileMenu({ isMenuOpen }) {

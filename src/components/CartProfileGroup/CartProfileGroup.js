@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./CartProfileGroup.module.css";
 
 import CartButton from "./CartButton.js";

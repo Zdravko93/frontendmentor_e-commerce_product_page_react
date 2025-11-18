@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./CartCheckoutButton.module.css";
 
 export default function CartCheckoutButton({ onCheckout }) {

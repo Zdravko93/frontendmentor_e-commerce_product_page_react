@@ -1,5 +1,3 @@
-import React from "react";
-
 import cartImg from "../../assets/icon-cart.svg";
 
 import classes from "./CartButton.module.css";

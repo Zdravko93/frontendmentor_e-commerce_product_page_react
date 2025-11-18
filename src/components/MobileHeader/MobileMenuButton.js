@@ -1,5 +1,3 @@
-import React from "react";
-
 import MenuIconOpen from "./MenuIconOpen.js";
 import MenuIconClose from "./MenuIconClose.js";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./MobileHeader.module.css";
 
 import MobileMenuButton from "./MobileMenuButton.js";

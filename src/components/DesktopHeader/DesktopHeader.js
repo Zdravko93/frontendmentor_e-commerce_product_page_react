@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "../MobileHeader/MobileHeader.module.css";
 import classesDesktopMenu from "./DesktopHeader.module.css";
 

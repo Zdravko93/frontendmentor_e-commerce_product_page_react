@@ -1,5 +1,3 @@
-import React from "react";
-
 import ImageGallery from "./ImageGallery/ImageGallery.js";
 
 import classes from "./LargeScreenLayout.module.css";

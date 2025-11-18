@@ -1,5 +1,3 @@
-import React from "react";
-
 import deleteImg from "../../assets/icon-delete.svg";
 
 export default function CartDeleteButton({ className, resetCartItems }) {

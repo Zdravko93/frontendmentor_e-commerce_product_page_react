@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./LightboxCloseButton.module.css";
 
 import LightboxCloseIcon from "./LightboxCloseIcon.js";
