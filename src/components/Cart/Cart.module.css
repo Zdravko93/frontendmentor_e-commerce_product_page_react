@@ -64,6 +64,16 @@
   background: transparent;
 }
 
+.delete-btn:focus,
+.delete-btn:focus-visible {
+  outline: 2px solid var(--clr-black) !important;
+  transform: scale(1.07);
+}
+
+.delete-btn img {
+  pointer-events: none;
+}
+
 @media (min-width: 768px) {
   .cart {
     max-width: 450px;
