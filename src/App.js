@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { debounce } from "./utils/debounce.js";
 
 import "./App.css";
 
@@ -32,7 +33,9 @@ function App() {
   const [cart, setCart] = useState({ items: 0, total: 0, isCheckout: false });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
 
   // cart-related states
   const [imageState, setImageState] = useState({
@@ -119,14 +122,6 @@ function App() {
   );
 
   // --- Handle resize ---
-  // debounce function
-  function debounce(fn, delay) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => fn(...args), delay);
-    };
-  }
 
   useEffect(() => {
     const handleResize = debounce(() => {
