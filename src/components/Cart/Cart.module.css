@@ -74,6 +74,7 @@
   pointer-events: none;
 }
 
+/* MEDIA QUERIES */
 @media (min-width: 768px) {
   .cart {
     max-width: 450px;
