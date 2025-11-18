@@ -106,5 +106,6 @@ git clone https://github.com/Zdravko93/frontendmentor_e-commerce_product_page_re
 - Implement animations for cart and lightbox interactions
 - Add local storage support to persist cart items between sessions
 - Refactor components for better reusability and maintainability
+- Create actual pages for each menu item, not just placeholders
 
 ✅ This project helped me strengthen my React fundamentals and attention to user experience — from dynamic state management to responsive, interactive UI components.
