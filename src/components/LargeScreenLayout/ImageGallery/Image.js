@@ -15,37 +15,26 @@ export default function Image({
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
 
-  // keyboard button activation
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleImageClick();
-    }
-  };
-
   return (
     <Card classNames={classNames["large-image"]}>
       <ul>
-        {images &&
-          images.length > 0 &&
-          images.map(
-            (image, index) =>
-              index === currentIndex && (
-                <li key={index}>
-                  <img
-                    className={
-                      imageTransition ? classNames.hidden : classNames.visible
-                    }
-                    src={image || images[0]}
-                    alt={`Product ${currentIndex + 1} of ${images.length}`}
-                    onClick={handleImageClick}
-                    onKeyDown={handleKeyDown}
-                    role="button"
-                    tabIndex={0}
-                  />
-                </li>
-              )
-          )}
+        {images
+          .filter((_, i) => i === currentIndex) // only the active image
+          .map((image, index) => (
+            <li key={index}>
+              <button
+                className={
+                  imageTransition ? classNames.hidden : classNames.visible
+                }
+                onClick={handleImageClick}
+              >
+                <img
+                  src={image || images[0]}
+                  alt={`Product ${currentIndex + 1} of ${images.length}`}
+                />
+              </button>
+            </li>
+          ))}
       </ul>
     </Card>
   );
