@@ -9,12 +9,18 @@
   cursor: pointer;
 }
 
+.large-image ul {
+  list-style: none;
+}
+
+.large-image li {
+  width: 100%;
+}
+
 .large-image button {
   border-radius: 12px;
   transition: opacity 100ms ease-in-out;
   width: 100%;
-  background: transparent;
-  display: block;
 }
 
 .large-image button img {
