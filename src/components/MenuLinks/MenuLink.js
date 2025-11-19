@@ -1,7 +1,7 @@
 export default function MenuLink({ link }) {
   return (
     <li>
-      <a href="#">{link}</a>
+      <a href={`#${link.toLowerCase()}`}>{link}</a>
     </li>
   );
 }
