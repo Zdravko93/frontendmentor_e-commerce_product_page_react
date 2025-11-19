@@ -69,7 +69,13 @@ function App() {
   const toggleCart = () => {
     if (!cart.isCheckout) setIsCartOpen((prev) => !prev);
   };
-  const closeBackdrop = () => setIsMenuOpen(false);
+  const closeBackdrop = () => {
+    setIsMenuOpen(false);
+  };
+  const handleCheckout = () => {
+    setIsCartOpen(false); // close the cart
+    checkout(); // open the checkout modal
+  };
 
   return (
     <div className="container">
@@ -116,7 +122,7 @@ function App() {
             onSubtractItem={subtractItem}
             totalCartItems={cart.total}
             onResetCartItems={resetCartItems}
-            onCheckout={checkout}
+            onCheckout={handleCheckout}
           />
         )}
         {cart.isCheckout && (
