@@ -30,7 +30,7 @@ export default function ImageGallery({
     const timer = setTimeout(() => {
       setCurrentIndex(activeThumbnailIndex); // Update the image after transition starts
       setImageTransition(false); // Reset the transition
-    }, 100); // Delay should match the transition time in your CSS
+    }, 100); // Delay should match the transition time in CSS
 
     return () => clearTimeout(timer); // Cleanup the timer on component unmount
   }, [activeThumbnailIndex]);
