@@ -1,35 +1,35 @@
 export default function SneakerDetailsButton({
   children,
+  type,
   onAddItem,
   onSubtractItem,
   onAddTotalItems,
   ...props
 }) {
-  const addItem = () => {
-    onAddItem();
-  };
+  const addItem = () => onAddItem && onAddItem();
 
-  const subtractItem = () => {
-    onSubtractItem();
-  };
+  const subtractItem = () => onSubtractItem && onSubtractItem();
 
-  const addTotalItemsToCart = () => {
-    onAddTotalItems();
-  };
+  const addTotalItemsToCart = () => onAddTotalItems && onAddTotalItems();
 
   const handleClick = () => {
-    if (props.altText === "Add") {
+    if (type === "add") {
       addItem();
-    } else if (props.altText === "Subtract") {
+    } else if (type === "subtract") {
       subtractItem();
-    } else if (props.altText === "Cart") {
+    } else if (type === "cart") {
       addTotalItemsToCart();
     }
   };
 
   return (
-    <button className={props.className} onClick={handleClick}>
-      <img src={props.image} alt={props.altText} />
+    <button
+      type="button"
+      className={props.className}
+      onClick={handleClick}
+      aria-label={!children ? props.altText : undefined} // use altText only if no children
+    >
+      <img src={props.image} alt={children ? "" : props.altText} />
       {children}
     </button>
   );
