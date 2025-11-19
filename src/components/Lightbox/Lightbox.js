@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import arrowLeftImg from "../../assets/icon-previous.svg";
 import arrowRightImg from "../../assets/icon-next.svg";
@@ -18,10 +18,49 @@ export default function Lightbox({
   onLightboxClose,
 }) {
   const [currentIndex, setCurrentIndex] = useState(activeThumbnailIndex);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
+
+  // Close on ESC
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") onLightboxClose();
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onLightboxClose]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!isLightboxOpen || !dialogRef.current) return;
+
+    const focusable = dialogRef.current.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    const trap = (e) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", trap);
+    first?.focus();
+
+    return () => document.removeEventListener("keydown", trap);
+  }, [isLightboxOpen]);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
@@ -38,8 +77,16 @@ export default function Lightbox({
   return (
     <>
       <Backdrop show={isLightboxOpen} />
-      <div className={classes["lightbox-container"]}>
+
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Enlarged product image viewer"
+        className={classes["lightbox-container"]}
+      >
         <LightboxCloseButton onLightboxClose={onLightboxClose} />
+
         <ImageGallery
           images={images}
           activeThumbnailIndex={currentIndex}
@@ -47,16 +94,19 @@ export default function Lightbox({
           isInLightBox={true}
         />
       </div>
+
       <div className={classes["arrows-positional-container"]}>
         <ArrowButton
           className={classes["arrow-left"]}
           arrowImage={arrowLeftImg}
           onClick={handlePrevClick}
+          ariaLabel="Previous image"
         />
         <ArrowButton
           className={classes["arrow-right"]}
           arrowImage={arrowRightImg}
           onClick={handleNextClick}
+          ariaLabel="Next image"
         />
       </div>
     </>

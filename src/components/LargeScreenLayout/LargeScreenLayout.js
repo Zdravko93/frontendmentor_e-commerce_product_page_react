@@ -16,7 +16,10 @@ export default function LargeScreenLayout({
   cartItems,
 }) {
   return (
-    <section className={classes["large-screen-layout"]}>
+    <section
+      className={classes["large-screen-layout"]}
+      aria-label="Product preview and details"
+    >
       <ImageGallery
         images={images}
         activeThumbnailIndex={activeThumbnailIndex}

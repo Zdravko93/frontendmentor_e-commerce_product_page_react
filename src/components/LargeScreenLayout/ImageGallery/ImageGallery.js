@@ -43,7 +43,11 @@ export default function ImageGallery({
   };
 
   return (
-    <div className={classes["image-gallery"]}>
+    <div
+      className={classes["image-gallery"]}
+      role="region"
+      aria-label="Product image gallery"
+    >
       <Image
         images={images}
         activeThumbnailIndex={currentIndex}

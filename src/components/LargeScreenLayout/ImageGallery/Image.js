@@ -15,6 +15,14 @@ export default function Image({
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
 
+  // keyboard button activation
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleImageClick();
+    }
+  };
+
   return (
     <Card classNames={classNames["large-image"]}>
       <ul>
@@ -29,8 +37,11 @@ export default function Image({
                       imageTransition ? classNames.hidden : classNames.visible
                     }
                     src={image || images[0]}
-                    alt="Sneakers"
+                    alt={`Product ${currentIndex + 1} of ${images.length}`}
                     onClick={handleImageClick}
+                    onKeyDown={handleKeyDown}
+                    role="button"
+                    tabIndex={0}
                   />
                 </li>
               )

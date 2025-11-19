@@ -7,7 +7,11 @@ export default function Thumbnails({
   onThumbnailClick,
 }) {
   return (
-    <div className={classNames["thumbnail-images"]}>
+    <div
+      className={classNames["thumbnail-images"]}
+      role="listbox"
+      aria-label="Product image thumbnails"
+    >
       {thumbnails.map((thumb, index) => (
         <Thumbnail
           key={index}

@@ -1,10 +1,16 @@
-export default function ArrowButton({ className, arrowImage, onClick }) {
+export default function ArrowButton({
+  className,
+  arrowImage,
+  onClick,
+  ariaLabel,
+}) {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label={ariaLabel}>
       <img
         className={className ? className : ""}
         src={arrowImage}
-        alt="Previous"
+        alt=""
+        aria-hidden="true"
       />
     </button>
   );

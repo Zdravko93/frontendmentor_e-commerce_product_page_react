@@ -1,7 +1,8 @@
-export default function LightboxCloseIcon({ altText }) {
+export default function LightboxCloseIcon() {
   return (
     <svg
-      aria-label={altText}
+      aria-hidden="true"
+      role="presentation"
       width="14"
       height="15"
       xmlns="http://www.w3.org/2000/svg"
