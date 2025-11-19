@@ -74,11 +74,13 @@ export default function HeroSlide({ classNames, images, isInLightbox }) {
         className={classNames["arrow-left"]}
         arrowImage={arrowLeftImg}
         onClick={handlePrevClick}
+        ariaLabel="Previous image"
       />
       <ArrowButton
         className={classNames["arrow-right"]}
         arrowImage={arrowRightImg}
         onClick={handleNextClick}
+        ariaLabel="Next  image"
       />
     </div>
   );
