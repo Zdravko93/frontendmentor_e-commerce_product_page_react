@@ -1,6 +1,6 @@
 export default function HeroImage({ classNames, image, index, isHidden }) {
   return (
-    <button>
+    <button aria-label={`View image ${index + 1} in fullscreen`}>
       <img
         className={`${classNames.sneakers} ${
           isHidden ? classNames.hidden : ""
