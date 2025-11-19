@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 import arrowLeftImg from "../../assets/icon-previous.svg";
 import arrowRightImg from "../../assets/icon-next.svg";
@@ -20,18 +20,35 @@ export default function Lightbox({
   const [currentIndex, setCurrentIndex] = useState(activeThumbnailIndex);
   const dialogRef = useRef(null);
 
+  const handlePrevClick = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  }, [images.length]);
+
+  const handleNextClick = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  }, [images.length]);
+
   useEffect(() => {
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
 
   // Close on ESC
   useEffect(() => {
+    if (!isLightboxOpen) return;
+
+    // keypress events
     const handleKey = (e) => {
       if (e.key === "Escape") onLightboxClose();
+      if (e.key === "ArrowLeft") handlePrevClick();
+      if (e.key === "ArrowRight") handleNextClick();
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
-  }, [onLightboxClose]);
+  }, [isLightboxOpen, onLightboxClose, handlePrevClick, handleNextClick]);
 
   // Focus trap
   useEffect(() => {
@@ -61,18 +78,6 @@ export default function Lightbox({
 
     return () => document.removeEventListener("keydown", trap);
   }, [isLightboxOpen]);
-
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
 
   return (
     <>
