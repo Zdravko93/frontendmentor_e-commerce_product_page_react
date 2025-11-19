@@ -6,21 +6,26 @@
 
 .large-image {
   border-radius: 12px;
-  overflow: hidden;
   cursor: pointer;
 }
 
-.large-image img {
+.large-image button {
   border-radius: 12px;
-  opacity: 0;
   transition: opacity 100ms ease-in-out;
+  width: 100%;
+  background: transparent;
+  display: block;
 }
 
-.large-image img.visible {
+.large-image button img {
+  border-radius: 12px;
+}
+
+.large-image button img.visible {
   opacity: 1;
 }
 
-.large-image img.hidden {
+.large-image button img.hidden {
   opacity: 0;
 }
 
