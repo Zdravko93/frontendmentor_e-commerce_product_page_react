@@ -6,7 +6,7 @@ import arrowRightImg from "../../assets/icon-next.svg";
 import HeroImage from "./HeroImage.js";
 import ArrowButton from "./ArrowButton.js";
 
-export default function HeroSlide({ classNames, images }) {
+export default function HeroSlide({ classNames, images, isInLightbox }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isImageChanging, setIsImageChanging] = useState(false);
 
@@ -33,21 +33,23 @@ export default function HeroSlide({ classNames, images }) {
   }, [isImageChanging, images.length]);
 
   useEffect(() => {
-    function handleKey(e) {
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        handlePrevClick();
-      }
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        handleNextClick();
-      }
+    if (!isInLightbox) {
+      const handleKey = (e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          handlePrevClick();
+        }
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          handleNextClick();
+        }
+      };
+
+      window.addEventListener("keydown", handleKey);
+
+      return () => window.removeEventListener("keydown", handleKey);
     }
-
-    window.addEventListener("keydown", handleKey);
-
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [handlePrevClick, handleNextClick]);
+  }, [isInLightbox, handlePrevClick, handleNextClick]);
 
   // Reset image changing state after transition
   useEffect(() => {
