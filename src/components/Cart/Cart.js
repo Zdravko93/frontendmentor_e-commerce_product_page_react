@@ -11,7 +11,12 @@ export default function Cart({ totalCartItems, onResetCartItems, onCheckout }) {
   };
 
   return (
-    <div className={classes.cart} role="region" aria-label="Shopping Cart">
+    <div
+      className={classes.cart}
+      role="region"
+      aria-label="Shopping Cart"
+      aria-atomic="true"
+    >
       <h3 className={classes["cart-title"]}>Cart</h3>
       {totalCartItems > 0 ? (
         <>
