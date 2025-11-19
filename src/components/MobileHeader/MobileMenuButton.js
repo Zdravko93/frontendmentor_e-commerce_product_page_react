@@ -10,14 +10,12 @@ export default function MobileMenuButton({
     <button
       className={classNames["menu-btn"]}
       aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-      aria-expanded={isMenuOpen ? "true" : "false"}
+      aria-expanded={isMenuOpen}
       onClick={onMenuToggle}
     >
-      {!isMenuOpen && (
-        <MenuIconOpen ariaLabel="Open menu icon" ariaHidden="true" />
-      )}
+      {!isMenuOpen && <MenuIconOpen ariaHidden={isMenuOpen} />}
       {isMenuOpen && (
-        <MenuIconClose ariaLabel="Close menu icon" ariaHidden="false" />
+        <MenuIconClose ariaLabel="Close menu icon" ariaHidden={!isMenuOpen} />
       )}
     </button>
   );

@@ -1,10 +1,9 @@
 import classes from "./MenuIcons.module.css";
 
-export default function MenuIconClose({ ariaLabel, ariaHidden }) {
+export default function MenuIconClose({ ariaHidden }) {
   return (
     <div className={classes["svg-container"]}>
       <svg
-        aria-label={ariaLabel}
         aria-hidden={ariaHidden}
         width="14"
         height="15"

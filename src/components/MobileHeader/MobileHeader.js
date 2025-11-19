@@ -9,6 +9,7 @@ export default function MobileHeader({
   onMenuToggle,
   onCartToggle,
   totalCartItems,
+  isCartOpen,
 }) {
   return (
     <>
@@ -25,6 +26,7 @@ export default function MobileHeader({
           <CartProfileGroup
             onCartToggle={onCartToggle}
             totalCartItems={totalCartItems}
+            isCartOpen={isCartOpen}
           />
         </div>
       </header>

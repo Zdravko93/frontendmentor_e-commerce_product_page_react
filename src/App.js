@@ -80,13 +80,18 @@ function App() {
   return (
     <div className="container">
       {isLargeScreen ? (
-        <DesktopHeader onCartToggle={toggleCart} totalCartItems={cart.total} />
+        <DesktopHeader
+          onCartToggle={toggleCart}
+          totalCartItems={cart.total}
+          isCartOpen={isCartOpen}
+        />
       ) : (
         <MobileHeader
           isMenuOpen={isMenuOpen}
           onMenuToggle={toggleMenu}
           onCartToggle={toggleCart}
           totalCartItems={cart.total}
+          isCartOpen={isCartOpen}
         />
       )}
 
