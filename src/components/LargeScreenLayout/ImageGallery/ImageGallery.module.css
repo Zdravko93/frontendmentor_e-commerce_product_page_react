@@ -11,16 +11,19 @@
 
 .large-image ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .large-image li {
+  padding: 0;
+  margin: 0;
   width: 100%;
 }
 
 .large-image button {
   border-radius: 12px;
   transition: opacity 100ms ease-in-out;
-  width: 100%;
 }
 
 .large-image button img {
