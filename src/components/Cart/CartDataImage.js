@@ -7,7 +7,7 @@ export default function CartDataImage() {
     <img
       className={classes["cart-sneakers-img"]}
       src={sneakersImg}
-      alt="Sneakers"
+      alt="Fall Limited Edition Sneakers product"
     />
   );
 }
