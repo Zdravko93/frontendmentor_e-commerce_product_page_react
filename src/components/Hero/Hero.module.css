@@ -46,3 +46,11 @@
 .arrow-right {
   right: 2.5em;
 }
+
+/* Disable flashing image swap animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hidden {
+    transition: none !important;
+    animation: none !important;
+  }
+}
