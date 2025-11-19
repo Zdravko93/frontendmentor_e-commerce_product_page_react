@@ -5,7 +5,11 @@ import DesktopMenu from "./DesktopMenu.js";
 import LogoImage from "../LogoImage/LogoImage.js";
 import CartProfileGroup from "../CartProfileGroup/CartProfileGroup.js";
 
-export default function DesktopHeader({ onCartToggle, totalCartItems }) {
+export default function DesktopHeader({
+  onCartToggle,
+  totalCartItems,
+  isCartOpen,
+}) {
   return (
     <header
       className={`${classes.header} ${classesDesktopMenu["desktop-header"]}`}
@@ -17,6 +21,7 @@ export default function DesktopHeader({ onCartToggle, totalCartItems }) {
       <CartProfileGroup
         onCartToggle={onCartToggle}
         totalCartItems={totalCartItems}
+        isCartOpen={isCartOpen}
       />
     </header>
   );
