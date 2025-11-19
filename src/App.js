@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
-import { debounce } from "./utils/debounce.js";
+import { useState } from "react";
 
 import "./App.css";
 
@@ -21,6 +20,11 @@ import DesktopHeader from "./components/DesktopHeader/DesktopHeader.js";
 import Lightbox from "./components/Lightbox/Lightbox.js";
 import CartCheckoutModal from "./components/Cart/CartCheckoutModal.js";
 
+// Custom Hooks
+import { useWindowWidth } from "./customHooks/useWindowWidth";
+import { useCart } from "./customHooks/useCart";
+import { useLightbox } from "./customHooks/useLightbox";
+
 // Image array
 const images = [
   sneakersImgOne,
@@ -30,124 +34,52 @@ const images = [
 ];
 
 function App() {
-  const [cart, setCart] = useState({ items: 0, total: 0, isCheckout: false });
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth : 1024
-  );
-
-  // cart-related states
-  const [imageState, setImageState] = useState({
-    activeIndex: 0,
-    lightboxIndex: 0,
-    isLightboxOpen: false,
-    isInLightbox: false,
-  });
-
+  // Window width
+  const screenWidth = useWindowWidth();
   const isLargeScreen = screenWidth >= 768;
 
-  // --- Cart functions ---
-  const addItem = useCallback(
-    () => setCart((prev) => ({ ...prev, items: prev.items + 1 })),
-    []
-  );
-  const subtractItem = useCallback(
-    () => setCart((prev) => ({ ...prev, items: Math.max(prev.items - 1, 0) })),
-    []
-  );
-  const addTotalItemsToCart = useCallback(
-    () =>
-      setCart((prev) => ({
-        ...prev,
-        total: prev.total + prev.items,
-        items: 0,
-      })),
-    []
-  );
-  const resetCartItems = useCallback(
-    () => setCart((prev) => ({ ...prev, total: 0 })),
-    []
-  );
-  const handleCheckout = useCallback(
-    () => setCart((prev) => ({ ...prev, total: 0, isCheckout: true })),
-    []
-  );
-  const handleCloseCheckoutModal = useCallback(
-    () => setCart((prev) => ({ ...prev, isCheckout: false })),
-    []
-  );
+  // Cart logic
+  const {
+    cart,
+    addItem,
+    subtractItem,
+    addTotalItemsToCart,
+    resetCartItems,
+    checkout,
+    closeCheckout,
+  } = useCart();
 
-  // --- Menu & Cart toggles ---
-  const handleCartToggle = useCallback(() => {
+  // Lightbox logic
+  const {
+    activeIndex,
+    lightboxIndex,
+    isLightboxOpen,
+    isInLightbox,
+    openLightbox,
+    closeLightbox,
+    selectThumbnail,
+    setActiveIndex,
+  } = useLightbox();
+
+  // Menu & Cart toggles
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleCart = () => {
     if (!cart.isCheckout) setIsCartOpen((prev) => !prev);
-  }, [cart.isCheckout]);
+  };
+  const closeBackdrop = () => setIsMenuOpen(false);
 
-  const handleMenuToggle = useCallback(
-    () => setIsMenuOpen((prev) => !prev),
-    []
-  );
-  const handleBackdropClick = useCallback(() => setIsMenuOpen(false), []);
-
-  // --- Image functions ---
-  const handleThumbnailClick = useCallback(
-    (index) => setImageState((prev) => ({ ...prev, activeIndex: index })),
-    []
-  );
-
-  const handleLightboxOpen = useCallback(
-    (index) =>
-      setImageState({
-        activeIndex: index,
-        lightboxIndex: index,
-        isLightboxOpen: true,
-        isInLightbox: true,
-      }),
-    []
-  );
-
-  const handleLightboxClose = useCallback(
-    () =>
-      setImageState((prev) => ({
-        ...prev,
-        isLightboxOpen: false,
-        isInLightbox: false,
-      })),
-    []
-  );
-
-  const handleLightBoxThumbnailClick = useCallback(
-    (index) => setImageState((prev) => ({ ...prev, lightboxIndex: index })),
-    []
-  );
-
-  // --- Handle resize ---
-
-  useEffect(() => {
-    const handleResize = debounce(() => {
-      setScreenWidth(window.innerWidth);
-    }, 150);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // UI
   return (
     <div className="container">
       {isLargeScreen ? (
-        <DesktopHeader
-          onCartToggle={handleCartToggle}
-          totalCartItems={cart.total}
-        />
+        <DesktopHeader onCartToggle={toggleCart} totalCartItems={cart.total} />
       ) : (
         <MobileHeader
           isMenuOpen={isMenuOpen}
-          onMenuToggle={handleMenuToggle}
-          onCartToggle={handleCartToggle}
+          onMenuToggle={toggleMenu}
+          onCartToggle={toggleCart}
           totalCartItems={cart.total}
         />
       )}
@@ -158,10 +90,10 @@ function App() {
         {isLargeScreen ? (
           <LargeScreenLayout
             images={images}
-            activeThumbnailIndex={imageState.activeIndex}
-            onImageClick={handleLightboxOpen}
-            onThumbnailClick={handleThumbnailClick}
-            isInLightbox={imageState.isInLightbox}
+            activeThumbnailIndex={activeIndex}
+            onImageClick={openLightbox}
+            onThumbnailClick={setActiveIndex}
+            isInLightbox={isInLightbox}
             onAddItem={addItem}
             onSubtractItem={subtractItem}
             onAddTotalItems={addTotalItemsToCart}
@@ -177,31 +109,29 @@ function App() {
         )}
 
         {!isLargeScreen && <MobileMenu isMenuOpen={isMenuOpen} />}
-        {isMenuOpen && (
-          <Backdrop show={isMenuOpen} onClick={handleBackdropClick} />
-        )}
+        {isMenuOpen && <Backdrop show={isMenuOpen} onClick={closeBackdrop} />}
         {isCartOpen && (
           <Cart
             onAddItem={addItem}
             onSubtractItem={subtractItem}
             totalCartItems={cart.total}
             onResetCartItems={resetCartItems}
-            onCheckout={handleCheckout}
+            onCheckout={checkout}
           />
         )}
         {cart.isCheckout && (
           <CartCheckoutModal
-            onCloseCheckoutModal={handleCloseCheckoutModal}
+            onCloseCheckoutModal={closeCheckout}
             isCheckout={cart.isCheckout}
           />
         )}
-        {imageState.isLightboxOpen && isLargeScreen && (
+        {isLightboxOpen && isLargeScreen && (
           <Lightbox
             images={images}
-            activeThumbnailIndex={imageState.lightboxIndex}
-            onThumbnailClick={handleLightBoxThumbnailClick}
-            isLightboxOpen={imageState.isLightboxOpen}
-            onLightboxClose={handleLightboxClose}
+            activeThumbnailIndex={lightboxIndex}
+            onThumbnailClick={selectThumbnail}
+            isLightboxOpen={isLightboxOpen}
+            onLightboxClose={closeLightbox}
           />
         )}
       </main>
