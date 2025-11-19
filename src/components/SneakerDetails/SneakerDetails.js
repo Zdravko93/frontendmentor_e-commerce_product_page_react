@@ -11,12 +11,14 @@ import SneakerDetailsButton from "./SneakerDetailsButton.js";
 const operationButtons = [
   {
     id: "subtract",
+    type: "subtract",
     className: classes.subtract,
     image: minusImg,
     altText: "Remove one item from cart",
   },
   {
     id: "add",
+    type: "add",
     className: classes.add,
     image: plusImg,
     altText: "Add one item to cart",
@@ -51,17 +53,26 @@ export default function SneakerDetails({
                 className={button.className}
                 image={button.image}
                 altText={button.altText}
-                onAddItem={button.altText === "Add" ? onAddItem : undefined}
+                type={button.type}
+                onAddItem={
+                  button.altText === "Add one item to cart"
+                    ? onAddItem
+                    : undefined
+                }
                 onSubtractItem={
-                  button.altText === "Subtract" ? onSubtractItem : undefined
+                  button.altText === "Remove one item from cart"
+                    ? onSubtractItem
+                    : undefined
                 }
               />
             ))}
           </div>
+
           <SneakerDetailsButton
             className={classes["add-btn"]}
             image={cartImg}
-            altText="Cart"
+            altText="Add all selected items to cart"
+            type="cart"
             onAddTotalItems={onAddTotalItems}
           >
             Add to cart
