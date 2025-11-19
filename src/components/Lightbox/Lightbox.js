@@ -9,6 +9,7 @@ import ImageGallery from "../LargeScreenLayout/ImageGallery/ImageGallery.js";
 import Backdrop from "../Backdrop/Backdrop.js";
 import LightboxCloseButton from "./LightboxCloseButton.js";
 import ArrowButton from "../Hero/ArrowButton.js";
+import { useNavigationKeys } from "../../customHooks/useNavigationKeys.js";
 
 export default function Lightbox({
   images,
@@ -36,19 +37,21 @@ export default function Lightbox({
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
 
-  // Close on ESC
-  useEffect(() => {
-    if (!isLightboxOpen) return;
+  // Keypress events
+  const handleKeyPress = useCallback(
+    (key) => {
+      if (key === "ArrowLeft") handlePrevClick();
+      if (key === "ArrowRight") handleNextClick();
+      if (key === "Escape") onLightboxClose();
+    },
+    [handlePrevClick, handleNextClick, onLightboxClose]
+  );
 
-    // keypress events
-    const handleKey = (e) => {
-      if (e.key === "Escape") onLightboxClose();
-      if (e.key === "ArrowLeft") handlePrevClick();
-      if (e.key === "ArrowRight") handleNextClick();
-    };
-    document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
-  }, [isLightboxOpen, onLightboxClose, handlePrevClick, handleNextClick]);
+  useNavigationKeys({
+    keys: ["ArrowLeft", "ArrowRight", "Escape"],
+    enabled: isLightboxOpen,
+    onKeyPress: handleKeyPress,
+  });
 
   // Focus trap
   useEffect(() => {

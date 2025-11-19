@@ -1,5 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 
+// Custom hook
+import { useNavigationKeys } from "../../customHooks/useNavigationKeys.js";
+
 import arrowLeftImg from "../../assets/icon-previous.svg";
 import arrowRightImg from "../../assets/icon-next.svg";
 
@@ -32,24 +35,21 @@ export default function HeroSlide({ classNames, images, isInLightbox }) {
     }
   }, [isImageChanging, images.length]);
 
-  useEffect(() => {
-    if (!isInLightbox) {
-      const handleKey = (e) => {
-        if (e.key === "ArrowLeft") {
-          e.preventDefault();
-          handlePrevClick();
-        }
-        if (e.key === "ArrowRight") {
-          e.preventDefault();
-          handleNextClick();
-        }
-      };
+  // Keypress events
+  const handleKeyPress = useCallback(
+    (key) => {
+      if (key === "ArrowLeft") handlePrevClick();
+      if (key === "ArrowRight") handleNextClick();
+    },
+    [handlePrevClick, handleNextClick]
+  );
 
-      window.addEventListener("keydown", handleKey);
-
-      return () => window.removeEventListener("keydown", handleKey);
-    }
-  }, [isInLightbox, handlePrevClick, handleNextClick]);
+  useNavigationKeys({
+    keys: ["ArrowLeft", "ArrowRight"],
+    enabled: !isInLightbox,
+    onKeyPress: handleKeyPress,
+    deps: [handlePrevClick, handleNextClick],
+  });
 
   // Reset image changing state after transition
   useEffect(() => {
