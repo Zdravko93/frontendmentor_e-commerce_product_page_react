@@ -9,7 +9,7 @@ const links = ["Collections", "Men", "Women", "About", "Contact"];
 
 export default function MenuLinks({ isDesktopSize, isMenuOpen }) {
   return (
-    <nav>
+    <nav aria-label={`${isDesktopSize ? "Main menu" : "Mobile menu"}`}>
       <ul
         className={
           isDesktopSize
@@ -18,6 +18,7 @@ export default function MenuLinks({ isDesktopSize, isMenuOpen }) {
                 isMenuOpen ? classesMobileMenu.open : ""
               }`
         }
+        aria-hidden={!isMenuOpen && !isDesktopSize}
       >
         {links.map((link, index) => (
           <React.Fragment key={index}>
