@@ -8,7 +8,11 @@ export default function CartCheckoutModal({
 }) {
   return (
     <>
-      <div className={classes["checkout-modal"]}>
+      <div
+        aria-modal="true"
+        role="dialog"
+        className={classes["checkout-modal"]}
+      >
         <h3>You have successfully submitted your order!</h3>
         <button onClick={onCloseCheckoutModal}>Close</button>
       </div>
