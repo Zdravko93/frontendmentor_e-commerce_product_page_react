@@ -13,13 +13,13 @@ const operationButtons = [
     id: "subtract",
     className: classes.subtract,
     image: minusImg,
-    altText: "Subtract",
+    altText: "Remove one item from cart",
   },
   {
     id: "add",
     className: classes.add,
     image: plusImg,
-    altText: "Add",
+    altText: "Add one item to cart",
   },
 ];
 
@@ -30,13 +30,20 @@ export default function SneakerDetails({
   cartItems,
 }) {
   return (
-    <section className={classes["sneakers-details"]}>
+    <section
+      className={classes["sneakers-details"]}
+      aria-label="Sneaker product details"
+    >
       <SneakerDetailsText className={classes["sneakers-description"]} />
       <div className={classes["sneakers-price-info"]}>
         <SneakerDetailsPrices classNames={classes} />
 
         <div className={classes["btn-group"]}>
           <div className={classes["add-subtract-group"]}>
+            <span aria-live="polite" className="sr-only">
+              {cartItems} items selected
+            </span>
+
             {cartItems}
             {operationButtons.map((button) => (
               <SneakerDetailsButton
