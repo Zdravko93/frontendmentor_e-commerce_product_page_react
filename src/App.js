@@ -91,7 +91,7 @@ function App() {
       )}
 
       <main>
-        {!isLargeScreen && <Hero images={images} />}
+        {!isLargeScreen && <Hero images={images} isInLightbox={isInLightbox} />}
 
         {isLargeScreen ? (
           <LargeScreenLayout
