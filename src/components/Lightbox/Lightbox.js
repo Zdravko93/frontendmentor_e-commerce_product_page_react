@@ -9,7 +9,10 @@ import ImageGallery from "../LargeScreenLayout/ImageGallery/ImageGallery.js";
 import Backdrop from "../Backdrop/Backdrop.js";
 import LightboxCloseButton from "./LightboxCloseButton.js";
 import ArrowButton from "../Hero/ArrowButton.js";
+
+// Custom hook
 import { useNavigationKeys } from "../../customHooks/useNavigationKeys.js";
+import { useFocusTrap } from "../../customHooks/useFocusTrap.js";
 
 export default function Lightbox({
   images,
@@ -54,33 +57,10 @@ export default function Lightbox({
   });
 
   // Focus trap
-  useEffect(() => {
-    if (!isLightboxOpen || !dialogRef.current) return;
-
-    const focusable = dialogRef.current.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    const trap = (e) => {
-      if (e.key !== "Tab") return;
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", trap);
-    first?.focus();
-
-    return () => document.removeEventListener("keydown", trap);
-  }, [isLightboxOpen]);
+  useFocusTrap({
+    containerRef: dialogRef,
+    enabled: isLightboxOpen,
+  });
 
   return (
     <>
