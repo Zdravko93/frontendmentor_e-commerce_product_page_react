@@ -5,44 +5,42 @@ export function useFocusTrap({ containerRef, enabled = true }) {
     if (!enabled || !containerRef?.current) return;
 
     const container = containerRef.current;
+    const focusableSelectors =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-    // Focus modal container initially
-    container.focus();
-
-    const focusable = containerRef.current.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-
-    if (!focusable.length) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    const trap = (e) => {
+    const trapFocus = (e) => {
       if (e.key !== "Tab") return;
 
-      if (e.shiftKey && document.activeElement === first) {
+      const focusable = Array.from(
+        container.querySelectorAll(focusableSelectors)
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
         e.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
+      } else if (!e.shiftKey && active === last) {
         e.preventDefault();
         first.focus();
       }
     };
 
-    // Prevent changing focus to elements outside modal
     const handleClickOutside = (e) => {
       if (!container.contains(e.target)) {
         e.preventDefault();
-        container.focus();
+        container.querySelector(focusableSelectors)?.focus();
       }
     };
 
-    document.addEventListener("keydown", trap);
+    document.addEventListener("keydown", trapFocus);
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("keydown", trap);
+      document.removeEventListener("keydown", trapFocus);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [enabled, containerRef]);
