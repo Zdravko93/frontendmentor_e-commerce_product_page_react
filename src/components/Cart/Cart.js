@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
 import classes from "./Cart.module.css";
 
 import CartData from "./CartData.js";
@@ -5,17 +8,40 @@ import CartDeleteButton from "./CartDeleteButton.js";
 import CartCheckoutButton from "./CartCheckoutButton.js";
 import CartEmptyContainer from "./CartEmptyContainer.js";
 
-export default function Cart({ totalCartItems, onResetCartItems, onCheckout }) {
+// Custom hook
+import { useFocusTrap } from "../../customHooks/useFocusTrap.js";
+
+export default function Cart({
+  totalCartItems,
+  onResetCartItems,
+  onCheckout,
+  isCartOpen,
+}) {
+  const cartRef = useRef(null);
+
+  useEffect(() => {
+    if (isCartOpen) {
+      cartRef.current?.focus();
+    }
+  }, [isCartOpen]);
+
   const resetCartItems = () => {
     onResetCartItems();
   };
 
-  return (
+  // trap focus on the main container
+  useFocusTrap({
+    containerRef: cartRef,
+    enabled: isCartOpen,
+  });
+
+  return ReactDOM.createPortal(
     <div
       className={classes.cart}
       role="region"
       aria-label="Shopping Cart"
       aria-atomic="true"
+      tabIndex={-1} // allows programmatic focus, instead of tabbing the element (main container)
     >
       <h3 className={classes["cart-title"]}>Cart</h3>
       {totalCartItems > 0 ? (
@@ -40,6 +66,7 @@ export default function Cart({ totalCartItems, onResetCartItems, onCheckout }) {
           <CartEmptyContainer />
         </div>
       )}
-    </div>
+    </div>,
+    document.getElementById("modal-root")
   );
 }
