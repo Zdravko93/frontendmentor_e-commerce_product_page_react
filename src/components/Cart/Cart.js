@@ -19,9 +19,13 @@ export default function Cart({
 }) {
   const cartRef = useRef(null);
 
+  // Focus first interactive element on open
   useEffect(() => {
-    if (isCartOpen) {
-      cartRef.current?.focus();
+    if (isCartOpen && cartRef.current) {
+      const firstFocusable = cartRef.current.querySelector(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      firstFocusable?.focus();
     }
   }, [isCartOpen]);
 
