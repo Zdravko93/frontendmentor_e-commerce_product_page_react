@@ -12,6 +12,11 @@
   z-index: 100;
 }
 
+.lightbox-container:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 1px;
+}
+
 .arrows-positional-container {
   position: fixed;
   top: 45%;
