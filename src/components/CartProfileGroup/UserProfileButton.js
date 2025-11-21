@@ -4,7 +4,7 @@ import classes from "./UserProfileButton.module.css";
 
 export default function UserProfileButton() {
   // Here I previously had <button> as a wrapper element
-  // but currently there is no need for that since avatar doesn't have any functionality yet (Log In/Log Out, Register, Action Menu etc)
+  // but currently there is no need for that since avatar doesn't have any interactivity yet (Log In/Log Out, Register, Action Menu etc)
   return (
     <img
       className={classes["user-profile-img"]}
