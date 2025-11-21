@@ -1,10 +1,16 @@
+import { forwardRef } from "react";
+
 import classes from "./LightboxCloseButton.module.css";
 
 import LightboxCloseIcon from "./LightboxCloseIcon.js";
 
-export default function LightboxCloseButton({ onLightboxClose }) {
+const LightboxCloseButton = forwardRef(function LightboxCloseButton(
+  { onLightboxClose },
+  ref
+) {
   return (
     <button
+      ref={ref}
       className={classes["lightbox-close-btn"]}
       onClick={onLightboxClose}
       aria-label="Close lightbox"
@@ -12,4 +18,6 @@ export default function LightboxCloseButton({ onLightboxClose }) {
       <LightboxCloseIcon />
     </button>
   );
-}
+});
+
+export default LightboxCloseButton;
