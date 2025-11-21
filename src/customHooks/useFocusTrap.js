@@ -11,9 +11,11 @@ export function useFocusTrap({ containerRef, enabled = true }) {
     const trapFocus = (e) => {
       if (e.key !== "Tab") return;
 
+      // focusable elements
       const focusable = Array.from(
         container.querySelectorAll(focusableSelectors)
       );
+
       if (!focusable.length) return;
 
       const first = focusable[0];
