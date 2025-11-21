@@ -37,6 +37,11 @@
   transition: all 100ms ease-in-out;
 }
 
+.checkout-modal button:focus-visible {
+  outline: 3px solid rgb(37, 206, 197);
+  outline-offset: 2px;
+}
+
 .checkout-modal button:hover {
   color: white;
   background: green;
