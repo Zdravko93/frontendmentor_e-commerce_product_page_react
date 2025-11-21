@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import ReactDOM from "react-dom";
 
 import arrowLeftImg from "../../assets/icon-previous.svg";
 import arrowRightImg from "../../assets/icon-next.svg";
@@ -23,6 +24,7 @@ export default function Lightbox({
 }) {
   const [currentIndex, setCurrentIndex] = useState(activeThumbnailIndex);
   const dialogRef = useRef(null);
+  const closeBtnRef = useRef(null); // lightbox close button ref (passed down to LightboxCloseButton)
 
   const handlePrevClick = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -39,6 +41,44 @@ export default function Lightbox({
   useEffect(() => {
     setCurrentIndex(activeThumbnailIndex);
   }, [activeThumbnailIndex]);
+
+  // Automatically set focus on close button on lightbox open
+  useEffect(() => {
+    if (isLightboxOpen) {
+      closeBtnRef.current?.focus();
+    }
+  }, [isLightboxOpen]);
+
+  useEffect(() => {
+    if (!isLightboxOpen || !dialogRef.current) return;
+
+    const container = dialogRef.current;
+    const handleTab = (e) => {
+      const focusable = Array.from(
+        container.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.key === "Tab") {
+        if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [isLightboxOpen]);
 
   // Keypress events
   const handleKeyPress = useCallback(
@@ -62,7 +102,7 @@ export default function Lightbox({
     enabled: isLightboxOpen,
   });
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <Backdrop show={isLightboxOpen} />
 
@@ -72,8 +112,12 @@ export default function Lightbox({
         aria-modal="true"
         aria-label="Enlarged product image viewer"
         className={classes["lightbox-container"]}
+        tabIndex={0}
       >
-        <LightboxCloseButton onLightboxClose={onLightboxClose} />
+        <LightboxCloseButton
+          ref={closeBtnRef}
+          onLightboxClose={onLightboxClose}
+        />
 
         <ImageGallery
           images={images}
@@ -81,22 +125,23 @@ export default function Lightbox({
           onThumbnailClick={onThumbnailClick}
           isInLightBox={true}
         />
-      </div>
 
-      <div className={classes["arrows-positional-container"]}>
-        <ArrowButton
-          className={classes["arrow-left"]}
-          arrowImage={arrowLeftImg}
-          onClick={handlePrevClick}
-          ariaLabel="Previous image"
-        />
-        <ArrowButton
-          className={classes["arrow-right"]}
-          arrowImage={arrowRightImg}
-          onClick={handleNextClick}
-          ariaLabel="Next image"
-        />
+        <div className={classes["arrows-positional-container"]}>
+          <ArrowButton
+            className={classes["arrow-left"]}
+            arrowImage={arrowLeftImg}
+            onClick={handlePrevClick}
+            ariaLabel="Previous image"
+          />
+          <ArrowButton
+            className={classes["arrow-right"]}
+            arrowImage={arrowRightImg}
+            onClick={handleNextClick}
+            ariaLabel="Next image"
+          />
+        </div>
       </div>
-    </>
+    </>,
+    document.getElementById("modal-root")
   );
 }
