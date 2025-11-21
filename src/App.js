@@ -126,6 +126,7 @@ function App() {
             totalCartItems={cart.total}
             onResetCartItems={resetCartItems}
             onCheckout={handleCheckout}
+            isCartOpen={isCartOpen}
           />
         )}
         {cart.isCheckout && (
