@@ -39,6 +39,7 @@ export default function CartCheckoutModal({
         ref={modalRef}
         aria-modal="true"
         role="dialog"
+        tabIndex={-1}
         className={classes["checkout-modal"]}
       >
         <h3>You have successfully submitted your order!</h3>
