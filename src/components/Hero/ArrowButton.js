@@ -5,7 +5,7 @@ export default function ArrowButton({
   ariaLabel,
 }) {
   return (
-    <button onClick={onClick} aria-label={ariaLabel}>
+    <button onClick={onClick} aria-label={ariaLabel} tabIndex={-1}>
       <img
         className={className ? className : ""}
         src={arrowImage}
