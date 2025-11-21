@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 
-export function useFocusTrap({
-  containerRef,
-  enabled = true,
-  initialFocus = null,
-}) {
+export function useFocusTrap({ containerRef, enabled = true }) {
   useEffect(() => {
     if (!enabled || !containerRef?.current) return;
+
+    const container = containerRef.current;
+
+    // Focus modal container initially
+    container.focus();
 
     const focusable = containerRef.current.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -16,12 +17,6 @@ export function useFocusTrap({
 
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-
-    if (initialFocus) {
-      initialFocus.focus();
-    } else {
-      first.focus();
-    }
 
     const trap = (e) => {
       if (e.key !== "Tab") return;
@@ -35,7 +30,20 @@ export function useFocusTrap({
       }
     };
 
+    // Prevent changing focus to elements outside modal
+    const handleClickOutside = (e) => {
+      if (!container.contains(e.target)) {
+        e.preventDefault();
+        container.focus();
+      }
+    };
+
     document.addEventListener("keydown", trap);
-    return () => document.removeEventListener("keydown", trap);
-  }, [enabled, containerRef, initialFocus]);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("keydown", trap);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [enabled, containerRef]);
 }
