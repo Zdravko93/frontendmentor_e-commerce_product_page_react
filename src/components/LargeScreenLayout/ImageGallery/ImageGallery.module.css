@@ -26,6 +26,12 @@
   transition: opacity 100ms ease-in-out;
 }
 
+.large-image button:focus {
+  outline: 3px solid rgb(1, 107, 168);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
 .large-image button img {
   border-radius: 12px;
 }
