@@ -7,6 +7,11 @@
   background: transparent;
 }
 
+.lightbox-close-btn:focus-visible {
+  outline: 3px solid var(--accent-color, #ff7d1a);
+  outline-offset: 4px;
+}
+
 .lightbox-close-btn svg {
   fill: var(--clr-white);
   transition: fill 300ms ease;
