@@ -69,9 +69,7 @@ function App() {
   const toggleCart = () => {
     if (!cart.isCheckout) setIsCartOpen((prev) => !prev);
   };
-  const closeBackdrop = () => {
-    setIsMenuOpen(false);
-  };
+
   const handleCheckout = () => {
     setIsCartOpen(false); // close the cart
     checkout(); // open the checkout modal
@@ -120,7 +118,7 @@ function App() {
         )}
 
         {!isLargeScreen && <MobileMenu isMenuOpen={isMenuOpen} />}
-        {isMenuOpen && <Backdrop show={isMenuOpen} onClick={closeBackdrop} />}
+        {isMenuOpen && <Backdrop show={isMenuOpen} />}
         {isCartOpen && (
           <Cart
             onAddItem={addItem}
