@@ -1,4 +1,5 @@
 import { useRef, useCallback } from "react";
+import ReactDOM from "react-dom";
 
 import classes from "./CartCheckoutModal.module.css";
 import Backdrop from "../Backdrop/Backdrop.js";
@@ -33,7 +34,7 @@ export default function CartCheckoutModal({
     onKeyPress: handleKeyPress,
   });
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <div
         ref={modalRef}
@@ -47,6 +48,7 @@ export default function CartCheckoutModal({
       </div>
 
       <Backdrop show={isCheckout} />
-    </>
+    </>,
+    document.getElementById("modal-root")
   );
 }
