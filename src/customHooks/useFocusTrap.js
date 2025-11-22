@@ -1,12 +1,18 @@
 import { useEffect } from "react";
 
-export function useFocusTrap({ containerRef, enabled = true }) {
+export function useFocusTrap({ containerRef, enabled }) {
   useEffect(() => {
     if (!enabled || !containerRef?.current) return;
 
     const container = containerRef.current;
     const focusableSelectors =
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    // Autofocus first focusable item when trap turns on
+    const firstFocusable = container.querySelector(focusableSelectors);
+    if (firstFocusable) {
+      firstFocusable.focus();
+    }
 
     const trapFocus = (e) => {
       if (e.key !== "Tab") return;
@@ -21,6 +27,13 @@ export function useFocusTrap({ containerRef, enabled = true }) {
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       const active = document.activeElement;
+
+      // If focus is outside the container, pull it back
+      if (!container.contains(active)) {
+        e.preventDefault();
+        first.focus();
+        return;
+      }
 
       if (e.shiftKey && active === first) {
         e.preventDefault();
