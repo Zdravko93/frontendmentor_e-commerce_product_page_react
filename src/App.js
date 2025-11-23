@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { Helmet } from "react-helmet-async";
 
 import "./App.css";
 
@@ -76,83 +77,115 @@ function App() {
   }, [checkout]);
 
   return (
-    <div className="container">
-      {isLargeScreen ? (
-        <DesktopHeader
-          onCartToggle={toggleCart}
-          totalCartItems={cart.total}
-          isCartOpen={isCartOpen}
-          isDesktopSize={isLargeScreen}
+    <>
+      {/* SEO  */}
+      <Helmet>
+        <title>
+          Frontend Mentor - E-Commerce Product Page | Fall Limited Edition
+          Sneakers
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Zdravko" />
+        <meta
+          name="description"
+          content="Fall Limited Edition Sneakers - stylish, low-profile, and perfect for casual wear. Durable rubber sole for any weather."
         />
-      ) : (
-        <MobileHeader
-          isMenuOpen={isMenuOpen}
-          onMenuToggle={toggleMenu}
-          onCartToggle={toggleCart}
-          totalCartItems={cart.total}
-          isCartOpen={isCartOpen}
+        <meta
+          property="og:title"
+          content="Frontend Mentor - E-Commerce Product Page | Fall Limited Edition
+          Sneakers"
         />
-      )}
+        <meta
+          property="og:description"
+          content="Fall Limited Edition Sneakers - stylish, low-profile, and perfect for casual wear."
+        />
+        <meta property="og:image" content={images[0]} />
+        <link
+          rel="canonical"
+          href="https://zdravko93.github.io/frontendmentor_e-commerce_product_page_react/"
+        />
+      </Helmet>
 
-      <main>
-        {!isLargeScreen && <Hero images={images} isInLightbox={isInLightbox} />}
-
+      <div className="container">
         {isLargeScreen ? (
-          <LargeScreenLayout
-            images={images}
-            activeThumbnailIndex={activeIndex}
-            onImageClick={openLightbox}
-            onThumbnailClick={setActiveIndex}
-            isInLightbox={isInLightbox}
-            onAddItem={addItem}
-            onSubtractItem={subtractItem}
-            onAddTotalItems={addTotalItemsToCart}
-            cartItems={cart.items}
+          <DesktopHeader
+            onCartToggle={toggleCart}
+            totalCartItems={cart.total}
+            isCartOpen={isCartOpen}
+            isDesktopSize={isLargeScreen}
           />
         ) : (
-          <SneakerDetails
-            onAddItem={addItem}
-            onSubtractItem={subtractItem}
-            onAddTotalItems={addTotalItemsToCart}
-            cartItems={cart.items}
-          />
-        )}
-
-        {!isLargeScreen && (
-          <MobileMenu
+          <MobileHeader
             isMenuOpen={isMenuOpen}
-            isDesktopSize={isLargeScreen}
             onMenuToggle={toggleMenu}
-          />
-        )}
-        {isMenuOpen && <Backdrop show={isMenuOpen} />}
-        {isCartOpen && (
-          <Cart
-            onAddItem={addItem}
-            onSubtractItem={subtractItem}
+            onCartToggle={toggleCart}
             totalCartItems={cart.total}
-            onResetCartItems={resetCartItems}
-            onCheckout={handleCheckout}
             isCartOpen={isCartOpen}
           />
         )}
-        {cart.isCheckout && (
-          <CartCheckoutModal
-            onCloseCheckoutModal={closeCheckout}
-            isCheckout={cart.isCheckout}
-          />
-        )}
-        {isLightboxOpen && isLargeScreen && (
-          <Lightbox
-            images={images}
-            activeThumbnailIndex={lightboxIndex}
-            onThumbnailClick={selectThumbnail}
-            isLightboxOpen={isLightboxOpen}
-            onLightboxClose={closeLightbox}
-          />
-        )}
-      </main>
-    </div>
+
+        <main>
+          {!isLargeScreen && (
+            <Hero images={images} isInLightbox={isInLightbox} />
+          )}
+
+          {isLargeScreen ? (
+            <LargeScreenLayout
+              images={images}
+              activeThumbnailIndex={activeIndex}
+              onImageClick={openLightbox}
+              onThumbnailClick={setActiveIndex}
+              isInLightbox={isInLightbox}
+              onAddItem={addItem}
+              onSubtractItem={subtractItem}
+              onAddTotalItems={addTotalItemsToCart}
+              cartItems={cart.items}
+            />
+          ) : (
+            <SneakerDetails
+              onAddItem={addItem}
+              onSubtractItem={subtractItem}
+              onAddTotalItems={addTotalItemsToCart}
+              cartItems={cart.items}
+            />
+          )}
+
+          {!isLargeScreen && (
+            <MobileMenu
+              isMenuOpen={isMenuOpen}
+              isDesktopSize={isLargeScreen}
+              onMenuToggle={toggleMenu}
+            />
+          )}
+          {isMenuOpen && <Backdrop show={isMenuOpen} />}
+          {isCartOpen && (
+            <Cart
+              onAddItem={addItem}
+              onSubtractItem={subtractItem}
+              totalCartItems={cart.total}
+              onResetCartItems={resetCartItems}
+              onCheckout={handleCheckout}
+              isCartOpen={isCartOpen}
+            />
+          )}
+          {cart.isCheckout && (
+            <CartCheckoutModal
+              onCloseCheckoutModal={closeCheckout}
+              isCheckout={cart.isCheckout}
+            />
+          )}
+          {isLightboxOpen && isLargeScreen && (
+            <Lightbox
+              images={images}
+              activeThumbnailIndex={lightboxIndex}
+              onThumbnailClick={selectThumbnail}
+              isLightboxOpen={isLightboxOpen}
+              onLightboxClose={closeLightbox}
+            />
+          )}
+        </main>
+      </div>
+    </>
   );
 }
 
