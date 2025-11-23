@@ -1,5 +1,3 @@
-import classes from "../DesktopHeader/DesktopMenu.module.css";
-
 import MenuLinks from "../MenuLinks/MenuLinks.js";
 
 export default function DesktopMenu({ isDesktopSize }) {
