@@ -1,4 +1,6 @@
-export default function Thumbnail({
+import React, { useCallback } from "react";
+
+export default React.memo(function Thumbnail({
   classNames,
   imagePath,
   index,
@@ -7,12 +9,15 @@ export default function Thumbnail({
 }) {
   const isActive = index === activeThumbnailIndex;
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onThumbnailClick(index);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onThumbnailClick(index);
+      }
+    },
+    [index, onThumbnailClick]
+  );
 
   return (
     <div
@@ -32,4 +37,4 @@ export default function Thumbnail({
       </button>
     </div>
   );
-}
+});

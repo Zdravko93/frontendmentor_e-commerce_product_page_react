@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../../Card/Card.js";
 
-export default function Image({
+export default React.memo(function Image({
   images,
   activeThumbnailIndex,
   handleImageClick,
@@ -38,4 +38,4 @@ export default function Image({
       </ul>
     </Card>
   );
-}
+});

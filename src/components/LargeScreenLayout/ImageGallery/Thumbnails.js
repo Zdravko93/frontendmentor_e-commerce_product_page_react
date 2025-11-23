@@ -1,6 +1,8 @@
+import React from "react";
+
 import Thumbnail from "./Thumbnail.js";
 
-export default function Thumbnails({
+export default React.memo(function Thumbnails({
   classNames,
   thumbnails,
   activeThumbnailIndex,
@@ -24,4 +26,4 @@ export default function Thumbnails({
       ))}
     </div>
   );
-}
+});
