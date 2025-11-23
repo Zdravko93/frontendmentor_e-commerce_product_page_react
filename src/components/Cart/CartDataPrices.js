@@ -1,6 +1,8 @@
+import React from "react";
+
 import classes from "./CartDataPrices.module.css";
 
-export default function CartDataPrices({ totalCartItems }) {
+export default React.memo(function CartDataPrices({ totalCartItems }) {
   const unitPrice = 125;
   const totalPrice = (unitPrice * totalCartItems).toFixed(2);
 
@@ -15,4 +17,4 @@ export default function CartDataPrices({ totalCartItems }) {
       <span className={classes["total-price"]}>{`Total: $${totalPrice}`}</span>
     </div>
   );
-}
+});
