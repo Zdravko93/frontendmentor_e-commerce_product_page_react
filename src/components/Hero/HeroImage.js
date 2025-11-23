@@ -1,4 +1,11 @@
-export default function HeroImage({ classNames, image, index, isHidden }) {
+import React from "react";
+
+export default React.memo(function HeroImage({
+  classNames,
+  image,
+  index,
+  isHidden,
+}) {
   return (
     <button aria-label={`View image ${index + 1} in fullscreen`}>
       <img
@@ -10,4 +17,4 @@ export default function HeroImage({ classNames, image, index, isHidden }) {
       />
     </button>
   );
-}
+});

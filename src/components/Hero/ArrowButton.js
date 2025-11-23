@@ -1,4 +1,6 @@
-export default function ArrowButton({
+import React from "react";
+
+export default React.memo(function ArrowButton({
   className,
   arrowImage,
   onClick,
@@ -14,4 +16,4 @@ export default function ArrowButton({
       />
     </button>
   );
-}
+});
