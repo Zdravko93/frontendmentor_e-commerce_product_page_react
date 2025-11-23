@@ -1,9 +1,11 @@
+import React from "react";
+
 import classes from "./CartProfileGroup.module.css";
 
 import CartButton from "./CartButton.js";
 import UserProfileButton from "./UserProfileButton.js";
 
-export default function CartProfileGroup({
+export default React.memo(function CartProfileGroup({
   onCartToggle,
   totalCartItems,
   isCartOpen,
@@ -19,4 +21,4 @@ export default function CartProfileGroup({
       <UserProfileButton />
     </div>
   );
-}
+});

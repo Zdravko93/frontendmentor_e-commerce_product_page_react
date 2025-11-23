@@ -1,8 +1,10 @@
+import React from "react";
+
 import cartImg from "../../assets/icon-cart.svg";
 
 import classes from "./CartButton.module.css";
 
-export default function CartButton({ onCartToggle, isCartOpen }) {
+export default React.memo(function CartButton({ onCartToggle, isCartOpen }) {
   return (
     <button
       className={classes["cart-btn"]}
@@ -14,4 +16,4 @@ export default function CartButton({ onCartToggle, isCartOpen }) {
       <img src={cartImg} alt="Shopping cart" />
     </button>
   );
-}
+});
