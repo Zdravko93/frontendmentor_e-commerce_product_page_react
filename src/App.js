@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import "./App.css";
 
@@ -65,15 +65,16 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const toggleCart = () => {
-    if (!cart.isCheckout) setIsCartOpen((prev) => !prev);
-  };
+  const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
 
-  const handleCheckout = () => {
+  const toggleCart = useCallback(() => {
+    if (!cart.isCheckout) setIsCartOpen((prev) => !prev);
+  }, [cart.isCheckout]);
+
+  const handleCheckout = useCallback(() => {
     setIsCartOpen(false); // close the cart
     checkout(); // open the checkout modal
-  };
+  }, [checkout]);
 
   return (
     <div className="container">
