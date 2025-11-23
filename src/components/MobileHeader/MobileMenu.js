@@ -38,11 +38,7 @@ export default function MobileMenu({
   });
 
   return (
-    <nav
-      ref={!isDesktopSize ? menuRef : null}
-      className={`${classes["mobile-menu"]} ${isMenuOpen ? classes.open : ""}`}
-      aria-label={`${isDesktopSize ? "Main menu" : "Mobile menu"}`}
-    >
+    <nav ref={!isDesktopSize ? menuRef : null}>
       <MenuLinks isDesktopSize={false} isMenuOpen={isMenuOpen} />
     </nav>
   );
