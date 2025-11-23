@@ -1,24 +1,30 @@
-import { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import classes from "./CartCheckoutModal.module.css";
 import Backdrop from "../Backdrop/Backdrop.js";
-// Custom hook
+// Custom hooks
 import { useFocusTrap } from "../../customHooks/useFocusTrap.js";
 import { useNavigationKeys } from "../../customHooks/useNavigationKeys.js";
 
-export default function CartCheckoutModal({
+export default React.memo(function CartCheckoutModal({
   onCloseCheckoutModal,
   isCheckout,
 }) {
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (isCheckout && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [isCheckout]);
 
   useFocusTrap({
     containerRef: modalRef,
     enabled: isCheckout,
   });
 
-  // Escape key
+  // Escape key to close modal
   const handleKeyPress = useCallback(
     (key) => {
       if (key === "Escape") {
@@ -51,4 +57,4 @@ export default function CartCheckoutModal({
     </>,
     document.getElementById("modal-root")
   );
-}
+});
