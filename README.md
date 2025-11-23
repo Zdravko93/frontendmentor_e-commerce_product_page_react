@@ -59,7 +59,7 @@ Users should be able to:
 
 ### What I learned
 
-- Deepened my React skills, especially managing state with Context API
+- Deepened my React skills
 - Improved dynamic UI updates using React Hooks
 - Reinforced responsive design principles with Flexbox
 - Gained experience structuring a React project with modular CSS
