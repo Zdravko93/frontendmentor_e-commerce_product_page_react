@@ -1,22 +1,27 @@
-import MenuIconOpen from "./MenuIconOpen.js";
-import MenuIconClose from "./MenuIconClose.js";
+import { forwardRef } from "react";
 
-export default function MobileMenuButton({
-  classNames,
-  isMenuOpen,
-  onMenuToggle,
-}) {
+import MenuIconClose from "./MenuIconClose.js";
+import MenuIconOpen from "./MenuIconOpen.js";
+
+const MobileMenuButton = forwardRef(function MobileMenuButton(
+  { isMenuOpen, onMenuToggle, className },
+  ref
+) {
   return (
     <button
-      className={classNames["menu-btn"]}
+      ref={ref}
+      className={className}
       aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       aria-expanded={isMenuOpen}
       onClick={onMenuToggle}
     >
-      {!isMenuOpen && <MenuIconOpen ariaHidden={isMenuOpen} />}
-      {isMenuOpen && (
-        <MenuIconClose ariaLabel="Close menu icon" ariaHidden={!isMenuOpen} />
+      {isMenuOpen ? (
+        <MenuIconClose ariaHidden={isMenuOpen} />
+      ) : (
+        <MenuIconOpen ariaHidden={isMenuOpen} />
       )}
     </button>
   );
-}
+});
+
+export default MobileMenuButton;
