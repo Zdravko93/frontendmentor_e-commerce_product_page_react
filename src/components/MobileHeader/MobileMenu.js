@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 
-import classes from "./MobileMenu.module.css";
-
 import MenuLinks from "../MenuLinks/MenuLinks.js";
 
 // Custom hooks
