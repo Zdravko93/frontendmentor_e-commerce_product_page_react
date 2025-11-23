@@ -1,6 +1,11 @@
+import React from "react";
+
 import classes from "./CartCheckoutButton.module.css";
 
-export default function CartCheckoutButton({ onCheckout, ariaLabel }) {
+export default React.memo(function CartCheckoutButton({
+  onCheckout,
+  ariaLabel,
+}) {
   return (
     <button
       className={classes["checkout-btn"]}
@@ -10,4 +15,4 @@ export default function CartCheckoutButton({ onCheckout, ariaLabel }) {
       Checkout
     </button>
   );
-}
+});

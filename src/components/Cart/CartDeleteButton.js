@@ -1,6 +1,8 @@
+import React from "react";
+
 import deleteImg from "../../assets/icon-delete.svg";
 
-export default function CartDeleteButton({
+export default React.memo(function CartDeleteButton({
   className,
   resetCartItems,
   ariaLabel,
@@ -14,4 +16,4 @@ export default function CartDeleteButton({
       <img src={deleteImg} alt="Delete" />
     </button>
   );
-}
+});
