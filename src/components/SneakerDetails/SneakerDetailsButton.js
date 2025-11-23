@@ -1,4 +1,6 @@
-export default function SneakerDetailsButton({
+import React from "react";
+
+export default React.memo(function SneakerDetailsButton({
   children,
   type,
   onAddItem,
@@ -33,4 +35,4 @@ export default function SneakerDetailsButton({
       {children}
     </button>
   );
-}
+});

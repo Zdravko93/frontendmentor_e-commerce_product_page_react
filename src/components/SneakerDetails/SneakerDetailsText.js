@@ -1,4 +1,6 @@
-export default function SneakerDetailsText({ className }) {
+import React from "react";
+
+export default React.memo(function SneakerDetailsText({ className }) {
   return (
     <>
       <h1>Sneaker Company</h1>
@@ -10,4 +12,4 @@ export default function SneakerDetailsText({ className }) {
       </p>
     </>
   );
-}
+});

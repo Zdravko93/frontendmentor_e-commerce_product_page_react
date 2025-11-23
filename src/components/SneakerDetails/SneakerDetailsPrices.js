@@ -1,6 +1,8 @@
+import React from "react";
+
 import Card from "../Card/Card.js";
 
-export default function SneakerDetailsPrices({ classNames }) {
+export default React.memo(function SneakerDetailsPrices({ classNames }) {
   return (
     <Card>
       <div role="group" aria-label="Pricing information">
@@ -17,4 +19,4 @@ export default function SneakerDetailsPrices({ classNames }) {
       </div>
     </Card>
   );
-}
+});
