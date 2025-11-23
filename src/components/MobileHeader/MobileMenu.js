@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useCallback, useRef } from "react";
 
 import MenuLinks from "../MenuLinks/MenuLinks.js";
 
@@ -12,22 +12,25 @@ export default function MobileMenu({
 }) {
   const menuRef = useRef(null);
 
+  const handleEscape = useCallback(
+    (e) => {
+      if (e.key === "Escape") {
+        onMenuToggle();
+      }
+    },
+    [onMenuToggle]
+  );
+
   // Close menu with Escape key
   useEffect(() => {
     if (!isMenuOpen) return;
-
-    const handleEscape = (e) => {
-      if (e.key === "Escape") {
-        onMenuToggle(); // closes the menu
-      }
-    };
 
     document.addEventListener("keydown", handleEscape);
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [isMenuOpen, onMenuToggle]);
+  }, [isMenuOpen, handleEscape]);
 
   // trap focus
   useFocusTrap({
