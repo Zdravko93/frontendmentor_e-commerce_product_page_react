@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import classes from "./CartCheckoutModal.module.css";
@@ -7,7 +7,7 @@ import Backdrop from "../Backdrop/Backdrop.js";
 import { useFocusTrap } from "../../customHooks/useFocusTrap.js";
 import { useNavigationKeys } from "../../customHooks/useNavigationKeys.js";
 
-export default React.memo(function CartCheckoutModal({
+export default function CartCheckoutModal({
   onCloseCheckoutModal,
   isCheckout,
 }) {
@@ -57,4 +57,4 @@ export default React.memo(function CartCheckoutModal({
     </>,
     document.getElementById("modal-root")
   );
-});
+}
