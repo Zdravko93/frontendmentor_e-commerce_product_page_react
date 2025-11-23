@@ -82,6 +82,7 @@ function App() {
           onCartToggle={toggleCart}
           totalCartItems={cart.total}
           isCartOpen={isCartOpen}
+          isDesktopSize={isLargeScreen}
         />
       ) : (
         <MobileHeader
