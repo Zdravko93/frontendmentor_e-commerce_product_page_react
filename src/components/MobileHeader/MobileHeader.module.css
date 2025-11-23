@@ -15,13 +15,12 @@
 
 .menu-btn {
   position: fixed;
-  z-index: 200;
+  z-index: 300;
   background: transparent;
   margin-right: 1em;
 }
 
 .menu-btn:focus {
-  /* outline: 1px solid var(--clr-primary-orange); */
   transform: scale(1.4);
 }
 

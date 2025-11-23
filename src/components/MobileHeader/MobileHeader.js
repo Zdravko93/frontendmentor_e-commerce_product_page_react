@@ -17,12 +17,13 @@ export default function MobileHeader({
         <div className={classes["header-container"]}>
           <div className={classes["menu-logotype-group"]}>
             <MobileMenuButton
-              classNames={classes}
               isMenuOpen={isMenuOpen}
               onMenuToggle={onMenuToggle}
+              className={classes["menu-btn"]}
             />
             <LogoImage className={classes["logo-img"]} />
           </div>
+
           <CartProfileGroup
             onCartToggle={onCartToggle}
             totalCartItems={totalCartItems}
