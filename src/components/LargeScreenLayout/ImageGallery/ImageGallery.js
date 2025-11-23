@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import thumbnailOne from "../../../assets/image-product-1-thumbnail.jpg";
 import thumbnailTwo from "../../../assets/image-product-2-thumbnail.jpg";
@@ -12,7 +12,7 @@ import Thumbnails from "./Thumbnails.js";
 
 const thumbnails = [thumbnailOne, thumbnailTwo, thumbnailThree, thumbnailFour];
 
-export default React.memo(function ImageGallery({
+export default function ImageGallery({
   images,
   activeThumbnailIndex,
   onImageClick,
@@ -63,4 +63,4 @@ export default React.memo(function ImageGallery({
       />
     </div>
   );
-});
+}
