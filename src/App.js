@@ -117,7 +117,13 @@ function App() {
           />
         )}
 
-        {!isLargeScreen && <MobileMenu isMenuOpen={isMenuOpen} />}
+        {!isLargeScreen && (
+          <MobileMenu
+            isMenuOpen={isMenuOpen}
+            isDesktopSize={isLargeScreen}
+            onMenuToggle={toggleMenu}
+          />
+        )}
         {isMenuOpen && <Backdrop show={isMenuOpen} />}
         {isCartOpen && (
           <Cart
