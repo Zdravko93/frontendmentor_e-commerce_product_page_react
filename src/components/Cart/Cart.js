@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import ReactDOM from "react-dom";
 
 import classes from "./Cart.module.css";
@@ -29,9 +29,14 @@ export default function Cart({
     }
   }, [isCartOpen]);
 
-  const resetCartItems = () => {
+  // Avoid unnecessary re-creations
+  const resetCartItems = useCallback(() => {
     onResetCartItems();
-  };
+  }, [onResetCartItems]);
+
+  const handleCheckout = useCallback(() => {
+    onCheckout();
+  }, [onCheckout]);
 
   // trap focus on the main container
   useFocusTrap({
@@ -61,7 +66,8 @@ export default function Cart({
             </div>
           </div>
           <CartCheckoutButton
-            onCheckout={onCheckout}
+            onCheckout={handleCheckout} // passed/rceived 'onCheckout' prop is used inside handleCheckout function, to be able to wrapp it (use) with useCallback
+            // to avoid unnecessary re-renders and improve performance
             ariaLabel="Proceed to checkout"
           />
         </>
