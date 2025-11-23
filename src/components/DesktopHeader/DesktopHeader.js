@@ -9,6 +9,7 @@ export default function DesktopHeader({
   onCartToggle,
   totalCartItems,
   isCartOpen,
+  isDesktopSize,
 }) {
   return (
     <header
@@ -16,7 +17,7 @@ export default function DesktopHeader({
     >
       <div className={classesDesktopMenu["logo-menu-group"]}>
         <LogoImage />
-        <DesktopMenu />
+        <DesktopMenu isDesktopSize={isDesktopSize} />
       </div>
       <CartProfileGroup
         onCartToggle={onCartToggle}
