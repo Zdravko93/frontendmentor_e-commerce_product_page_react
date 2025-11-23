@@ -1,9 +1,49 @@
+import { useEffect, useRef } from "react";
+
+import classes from "./MobileMenu.module.css";
+
 import MenuLinks from "../MenuLinks/MenuLinks.js";
 
-export default function MobileMenu({ isMenuOpen }) {
+// Custom hooks
+import { useFocusTrap } from "../../customHooks/useFocusTrap.js";
+
+export default function MobileMenu({
+  isMenuOpen,
+  isDesktopSize,
+  onMenuToggle,
+}) {
+  const menuRef = useRef(null);
+
+  // Close menu with Escape key
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        onMenuToggle(); // closes the menu
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isMenuOpen, onMenuToggle]);
+
+  // trap focus
+  useFocusTrap({
+    containerRef: menuRef,
+    enabled: isMenuOpen,
+  });
+
   return (
-    <>
+    <nav
+      ref={!isDesktopSize ? menuRef : null}
+      className={`${classes["mobile-menu"]} ${isMenuOpen ? classes.open : ""}`}
+      aria-label={`${isDesktopSize ? "Main menu" : "Mobile menu"}`}
+    >
       <MenuLinks isDesktopSize={false} isMenuOpen={isMenuOpen} />
-    </>
+    </nav>
   );
 }
