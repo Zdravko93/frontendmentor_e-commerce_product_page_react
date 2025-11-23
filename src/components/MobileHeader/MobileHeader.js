@@ -1,10 +1,12 @@
+import React from "react";
+
 import classes from "./MobileHeader.module.css";
 
 import MobileMenuButton from "./MobileMenuButton.js";
 import LogoImage from "../LogoImage/LogoImage.js";
 import CartProfileGroup from "../CartProfileGroup/CartProfileGroup.js";
 
-export default function MobileHeader({
+export default React.memo(function MobileHeader({
   isMenuOpen,
   onMenuToggle,
   onCartToggle,
@@ -33,4 +35,4 @@ export default function MobileHeader({
       </header>
     </>
   );
-}
+});

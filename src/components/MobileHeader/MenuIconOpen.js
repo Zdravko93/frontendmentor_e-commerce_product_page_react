@@ -1,6 +1,8 @@
+import React from "react";
+
 import classes from "./MenuIcons.module.css";
 
-export default function MenuIconOpen({ ariaHidden }) {
+export default React.memo(function MenuIconOpen({ ariaHidden }) {
   return (
     <div className={classes["svg-container"]}>
       <svg
@@ -17,4 +19,4 @@ export default function MenuIconOpen({ ariaHidden }) {
       </svg>
     </div>
   );
-}
+});
