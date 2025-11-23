@@ -1,10 +1,11 @@
-import ImageGallery from "./ImageGallery/ImageGallery.js";
+import React from "react";
 
 import classes from "./LargeScreenLayout.module.css";
 
+import ImageGallery from "./ImageGallery/ImageGallery.js";
 import SneakerDetails from "../SneakerDetails/SneakerDetails.js";
 
-export default function LargeScreenLayout({
+export default React.memo(function LargeScreenLayout({
   images,
   activeThumbnailIndex,
   onImageClick,
@@ -35,4 +36,4 @@ export default function LargeScreenLayout({
       />
     </section>
   );
-}
+});
