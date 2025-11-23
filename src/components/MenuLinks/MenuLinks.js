@@ -18,9 +18,7 @@ export default function MenuLinks({ isDesktopSize, isMenuOpen }) {
       aria-hidden={!isMenuOpen && !isDesktopSize}
     >
       {links.map((link, index) => (
-        <ul>
-          <MenuLink link={link} key={index} />
-        </ul>
+        <MenuLink link={link} key={index} />
       ))}
     </ul>
   );
