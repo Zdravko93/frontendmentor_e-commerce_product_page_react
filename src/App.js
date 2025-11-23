@@ -35,8 +35,7 @@ const images = [
 
 function App() {
   // Window width
-  const screenWidth = useWindowWidth();
-  const isLargeScreen = screenWidth >= 768;
+  const isLargeScreen = useWindowWidth();
 
   // Cart logic
   const {
