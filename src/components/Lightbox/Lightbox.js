@@ -30,13 +30,13 @@ export default function Lightbox({
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  }, [images.length]);
+  }, [images]);
 
   const handleNextClick = useCallback(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
-  }, [images.length]);
+  }, [images]);
 
   useEffect(() => {
     setCurrentIndex(activeThumbnailIndex);
